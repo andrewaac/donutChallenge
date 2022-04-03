@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/donut_progress"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:indeterminateDrawable="@drawable/progress_color"
+        android:progressDrawable="@drawable/progress_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:progress="50" />
+
+    <TextView
+        android:id="@+id/donut_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/donut_value"
+        app:layout_constraintEnd_toEndOf="@id/donut_value"
+        app:layout_constraintStart_toStartOf="@id/donut_value"
+        tools:text="@string/donut_title" />
+
+    <TextView
+        android:id="@+id/donut_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="300" />
+
+    <TextView
+        android:id="@+id/donut_max_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="out of 700"
+        app:layout_constraintEnd_toEndOf="@id/donut_value"
+        app:layout_constraintStart_toStartOf="@id/donut_value"
+        app:layout_constraintTop_toBottomOf="@id/donut_value" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
