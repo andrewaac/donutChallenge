@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -37,12 +41,19 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
 
-    implementation(Dependencies.AndroidX.core)
     implementation(Dependencies.AndroidX.appCompat)
-    implementation(Dependencies.Google.material)
     implementation(Dependencies.AndroidX.constraintLayout)
+    implementation(Dependencies.AndroidX.core)
+    implementation(Dependencies.Google.material)
+    implementation(Dependencies.Dagger.hilt)
+
+    kapt(Dependencies.Dagger.hiltCompiler)
 
     testImplementation(Dependencies.junit)
 

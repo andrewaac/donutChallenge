@@ -8,6 +8,8 @@ object Versions {
         const val espressoVersion = "3.4.0"
     }
 
+    const val hiltVersion = "2.38.1"
+
     object Google {
         const val materialVersion = "1.5.0"
     }

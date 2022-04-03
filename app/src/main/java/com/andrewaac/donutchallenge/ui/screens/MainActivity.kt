@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.components.DonutView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var donutView: DonutView

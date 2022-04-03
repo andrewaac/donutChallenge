@@ -8,6 +8,11 @@ object Dependencies {
         val espresso by lazy { "androidx.test.espresso:espresso-core:${Versions.Android.espressoVersion}" }
     }
 
+    object Dagger {
+        val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hiltVersion}" }
+        val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}" }
+    }
+
     object Google {
         val material by lazy { "com.google.android.material:material:${Versions.Google.materialVersion}" }
     }
