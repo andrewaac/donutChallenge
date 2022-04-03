@@ -1,4 +1,4 @@
-package model
+package com.andrewaac.donutchallenge.model
 
 data class CreditReportInfo(
     val maxScoreValue: Int,

@@ -1,6 +1,6 @@
-package usecase
+package com.andrewaac.donutchallenge.usecase
 
-import repository.CreditScoreRepository
+import com.andrewaac.donutchallenge.repository.CreditScoreRepository
 
 class GetCreditScoreUseCase(private val creditScoreRepository: CreditScoreRepository) {
     suspend fun getCreditScore() = creditScoreRepository.getCreditScore()
