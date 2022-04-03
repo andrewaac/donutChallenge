@@ -1,5 +1,6 @@
 package com.andrewaac.donutchallenge.ui.components
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ProgressBar
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.extensions.changeVisibility
+import java.lang.IllegalArgumentException
 
 class DonutView @JvmOverloads constructor(
     context: Context,
@@ -29,9 +31,9 @@ class DonutView @JvmOverloads constructor(
 
     fun updateState(state: State) {
         when (state) {
-            State.Loading -> showingLoading()
-            is State.Loaded -> updateScore(state.score, state.maxScore)
             State.Error -> showError()
+            State.Loading -> showingLoading()
+            is State.Loaded -> showLoaded(state)
         }
     }
 
@@ -46,13 +48,21 @@ class DonutView @JvmOverloads constructor(
         updateVisibility(isError = true)
     }
 
+    private fun showLoaded(state: State.Loaded) {
+        try {
+            val score = validateCurrentScore(state)
+            updateScore(score, state.maxScore)
+        } catch (e: IllegalArgumentException) {
+            showError()
+        }
+    }
+
     private fun updateScore(score: Int, maxScore: Int) {
         donutTitle.text = context.getString(R.string.donut_title)
         donutProgressBar.isIndeterminate = false
 
-        val currentScore = validateCurrentScore(score, maxScore)
-        updateProgressBar(currentScore, maxScore)
-        updateCurrentScore(currentScore)
+        updateProgressBar(score, maxScore)
+        updateCurrentScore(score)
         updateMaxScore(maxScore)
 
         updateVisibility()
@@ -71,13 +81,15 @@ class DonutView @JvmOverloads constructor(
     }
 
 
-    private fun validateCurrentScore(currentScore: Int, maxScore: Int): Int {
-        return currentScore.coerceIn(0, maxScore)
+    private fun validateCurrentScore(state: State.Loaded): Int {
+        return with(state) { score.coerceIn(minScore, maxScore) }
     }
 
     private fun updateProgressBar(currentScore: Int, maxScore: Int) {
-        donutProgressBar.max = maxScore
-        donutProgressBar.progress = currentScore
+        with(donutProgressBar) {
+            max = maxScore
+            update(currentScore)
+        }
     }
 
     private fun updateCurrentScore(currentScore: Int) {
@@ -87,10 +99,17 @@ class DonutView @JvmOverloads constructor(
     private fun updateMaxScore(score: Int) {
         donutMaxValue.text = context.getString(R.string.score_out_of, score)
     }
+}
 
-    sealed class State {
-        object Loading : State()
-        data class Loaded(val score: Int, val maxScore: Int) : State()
-        object Error : State()
-    }
+sealed class State {
+    object Loading : State()
+    data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : State()
+    object Error : State()
+}
+
+private fun ProgressBar.update(score: Int) {
+    ObjectAnimator
+        .ofInt(this, "progress", 0, score)
+        .setDuration(500)
+        .start()
 }

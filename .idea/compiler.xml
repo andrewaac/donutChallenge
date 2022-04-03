@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="Donut_Challenge.app" target="11" />
       <module name="Donut_Challenge.buildSrc" target="11" />
+      <module name="Donut_Challenge.data" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

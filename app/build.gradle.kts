@@ -47,11 +47,18 @@ kapt {
 
 dependencies {
 
+    api(project(":domain"))
+    api(project(":data"))
+
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.constraintLayout)
     implementation(Dependencies.AndroidX.core)
+    implementation(Dependencies.AndroidX.viewModelScope)
     implementation(Dependencies.Google.material)
     implementation(Dependencies.Dagger.hilt)
+    implementation("androidx.fragment:fragment-ktx:1.4.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+
 
     kapt(Dependencies.Dagger.hiltCompiler)
 

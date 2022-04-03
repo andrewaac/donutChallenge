@@ -16,4 +16,6 @@ object Versions {
 
     const val junitVersion = "4.13.2"
 
+    const val retrofitVersion = "2.9.0"
+    const val okHttpVersion = "4.9.0"
 }

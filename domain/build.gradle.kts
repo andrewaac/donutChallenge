@@ -1,5 +1,6 @@
 plugins {
     id("java-library")
+    id("kotlin")
     id("org.jetbrains.kotlin.jvm")
 }
 
@@ -9,6 +10,8 @@ java {
 }
 
 dependencies {
+
+    implementation(Dependencies.javaxInject)
 
     // JUnit 5
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
