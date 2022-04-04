@@ -45,7 +45,7 @@ internal class MainViewModelTest {
 
     @Test
     fun `when onViewCreated is called, then Loading ViewState is emitted`() {
-        runBlocking {
+        runTest {
             val expected = ViewState.Loading
 
             sut.onViewCreated()
@@ -68,7 +68,7 @@ internal class MainViewModelTest {
 
     @Test
     fun `given getCreditScoreUseCase returns ValidCreditScore, when getCreditScore is called, them Error ViewState is emitted`() {
-        runBlocking {
+        runTest {
             val expected = ViewState.Loaded(10, 100, 0)
             whenever(creditScoreRepository.getCreditScore()).thenReturn(
                 CreditScore.ValidCreditScore(

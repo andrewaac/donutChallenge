@@ -11,7 +11,8 @@ class CreditScoreRepositoryImpl @Inject constructor(
     private val creditScoreApi: CreditScoreApi
 ) : CreditScoreRepository {
 
-    override suspend fun getCreditScore(): CreditScore {
+    @Throws(IOException::class)
+    override suspend fun getCreditScore(): CreditScore{
         return try {
             val response = creditScoreApi.getCreditScore()
 

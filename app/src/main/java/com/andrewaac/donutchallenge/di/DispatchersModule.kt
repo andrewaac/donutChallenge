@@ -13,14 +13,7 @@ import javax.inject.Named
 class DispatchersModule {
 
     @Provides
-    @Named("main")
-    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
-
-    @Provides
     @Named("io")
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-    @Provides
-    @Named("default")
-    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 }
