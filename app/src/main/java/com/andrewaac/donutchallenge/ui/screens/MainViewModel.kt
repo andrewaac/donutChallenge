@@ -7,10 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.andrewaac.donutchallenge.model.CreditScore
 import com.andrewaac.donutchallenge.usecase.GetCreditScoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Named
 
 sealed class ViewState {
     object Loading : ViewState()
@@ -20,7 +21,8 @@ sealed class ViewState {
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getCreditScoreUseCase: GetCreditScoreUseCase
+    private val getCreditScoreUseCase: GetCreditScoreUseCase,
+    @Named("io") private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val state: LiveData<ViewState>
@@ -29,12 +31,11 @@ class MainViewModel @Inject constructor(
 
     fun onViewCreated() {
         _state.value = ViewState.Loading
-        getCreditScore()
     }
 
-    private fun getCreditScore() {
+    fun getCreditScore() {
         viewModelScope.launch {
-            val creditScore = withContext(Dispatchers.IO) {
+            val creditScore = withContext(ioDispatcher) {
                 getCreditScoreUseCase.getCreditScore()
             }
             val newState = when (creditScore) {

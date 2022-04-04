@@ -37,13 +37,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        viewModel.onViewCreated()
     }
 
     override fun onResume() {
         super.onResume()
         donutView.updateState(State.Loading)
         button.setOnClickListener {
-            viewModel.onViewCreated()
+            viewModel.getCreditScore()
         }
     }
 }
