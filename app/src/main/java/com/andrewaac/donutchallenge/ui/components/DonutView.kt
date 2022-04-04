@@ -51,7 +51,6 @@ class DonutView @JvmOverloads constructor(
         updateTitleText()
         updateValueText(R.string.loading)
         updateMaxValue()
-        updateVisibility(isError = true)
     }
 
     private fun showError() {
@@ -60,8 +59,7 @@ class DonutView @JvmOverloads constructor(
         updateTitleText()
         updateValueText(R.string.error)
         updateProgressBar(MAX_SCORE, MAX_SCORE)
-        updateMaxValue(MAX_SCORE)
-        updateVisibility(isError = true)
+        updateMaxValue()
     }
 
     private fun showLoaded(state: State.Loaded) {
@@ -73,7 +71,6 @@ class DonutView @JvmOverloads constructor(
             updateValue(score)
             updateProgressBar(score, state.maxScore)
             updateMaxValue(state.maxScore)
-            updateVisibility()
         } catch (e: IllegalArgumentException) {
             showError()
         }
@@ -85,34 +82,28 @@ class DonutView @JvmOverloads constructor(
 
     private fun updateTitleText(@StringRes titleText: Int? = null) {
         donutTitle.text = titleText?.let { context.getString(it) } ?: EMPTY_STRING
+        donutTitle.changeVisibility(titleText != null)
     }
 
     private fun updateValueText(@StringRes valueText: Int? = null) {
         donutValue.text = valueText?.let { context.getString(it) } ?: EMPTY_STRING
+        donutValue.changeVisibility(valueText != null)
     }
 
     private fun updateValue(valueText: Int) {
         donutValue.text = "$valueText"
+        donutValue.changeVisibility(true)
     }
 
     private fun updateMaxValue(maxScore: Int? = null) {
         donutMaxValue.text =
             maxScore?.let { context.getString(R.string.score_out_of, maxScore) } ?: EMPTY_STRING
+        donutMaxValue.changeVisibility(maxScore != null)
     }
 
     private fun updateProgressDrawable(@DrawableRes drawableRes: Int = R.drawable.progress_color) {
         val drawable = ContextCompat.getDrawable(context, drawableRes)
         donutProgressBar.progressDrawable = drawable
-    }
-
-    private fun updateVisibility(isLoading: Boolean = false, isError: Boolean = false) {
-        val shouldShowDonutTitle = !(isError || isLoading)
-        val shouldShowDonutValue = true
-        val shouldShowDonutMaxValue = !(isError || isLoading)
-
-        donutTitle.changeVisibility(shouldShowDonutTitle)
-        donutValue.changeVisibility(shouldShowDonutValue)
-        donutMaxValue.changeVisibility(shouldShowDonutMaxValue)
     }
 
     private fun validateCurrentScore(state: State.Loaded): Int {
