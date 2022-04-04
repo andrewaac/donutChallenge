@@ -1,7 +1,6 @@
 package com.andrewaac.donutchallenge.ui.screens
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andrewaac.donutchallenge.R
@@ -13,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var donutView: DonutView
-    private lateinit var button: Button
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -21,9 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         donutView = findViewById(R.id.donut)
-        button = findViewById(R.id.button)
         setupViewModelObservers()
-        viewModel.onViewCreated()
     }
 
     override fun onResume() {

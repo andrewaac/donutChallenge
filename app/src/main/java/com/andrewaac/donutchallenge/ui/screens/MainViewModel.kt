@@ -29,11 +29,8 @@ class MainViewModel @Inject constructor(
         get() = _state
     private val _state = MutableLiveData<ViewState>()
 
-    fun onViewCreated() {
-        _state.value = ViewState.Loading
-    }
-
     fun getCreditScore() {
+        _state.value = ViewState.Loading
         viewModelScope.launch {
             val creditScore = withContext(ioDispatcher) {
                 getCreditScoreUseCase.getCreditScore()
