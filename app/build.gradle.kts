@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -53,27 +51,23 @@ dependencies {
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.constraintLayout)
     implementation(Dependencies.AndroidX.core)
+    implementation(Dependencies.AndroidX.fragment)
+    implementation(Dependencies.AndroidX.liveData)
     implementation(Dependencies.AndroidX.viewModelScope)
-    implementation(Dependencies.Google.material)
     implementation(Dependencies.Dagger.hilt)
-    implementation("androidx.fragment:fragment-ktx:1.4.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-
+    implementation(Dependencies.Google.material)
 
     kapt(Dependencies.Dagger.hiltCompiler)
 
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation(Dependencies.Coroutines.test)
+    testImplementation(Dependencies.JUnit5.api)
+    testImplementation(Dependencies.JUnit5.engine)
+    testImplementation(Dependencies.JUnit5.params)
+    testImplementation(Dependencies.Mockito.kotlin)
 
-    // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
-
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
-
-    androidTestImplementation(Dependencies.AndroidX.junit)
+    androidTestImplementation(Dependencies.AndroidX.coreTesting)
     androidTestImplementation(Dependencies.AndroidX.espresso)
-    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation(Dependencies.AndroidX.junit)
 
 }
 

@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.given
 import org.mockito.kotlin.mock
 import retrofit2.Response
-import java.io.IOException
 
 
 @ExperimentalCoroutinesApi

@@ -13,18 +13,13 @@ dependencies {
 
     implementation(Dependencies.javaxInject)
 
-    // JUnit 5
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
-
-    // Coroutines
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
-
-    // Mockito
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.1.0")
+    testImplementation(Dependencies.Coroutines.android)
+    testImplementation(Dependencies.Coroutines.core)
+    testImplementation(Dependencies.Coroutines.test)
+    testImplementation(Dependencies.JUnit5.api)
+    testImplementation(Dependencies.JUnit5.engine)
+    testImplementation(Dependencies.JUnit5.params)
+    testImplementation(Dependencies.Mockito.kotlin)
 }
 
 tasks.withType<Test> {
