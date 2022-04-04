@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rotate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fromDegrees="270"
-    android:toDegrees="270">
-    <shape
-        android:innerRadiusRatio="2.5"
-        android:shape="ring"
-        android:thickness="4dp"
-        android:useLevel="true">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape
+            android:innerRadiusRatio="2.8"
+            android:shape="ring"
+            android:thickness="1dp"
+            android:useLevel="false">
+            <solid android:color="@color/black" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <rotate
+            android:fromDegrees="270"
+            android:toDegrees="270">
+            <shape
+                android:shape="ring"
+                android:thickness="4dp"
+                android:useLevel="true">
+                <gradient
+                    android:endColor="@color/donut_orange"
+                    android:startColor="@color/donut_yellow"
+                    android:type="linear" />
+            </shape>
+        </rotate>
+    </item>
 
-        <gradient
-            android:endColor="@color/teal_200"
-            android:startColor="@color/purple_500"
-            android:type="linear" />
-
-    </shape>
-</rotate>
+</layer-list>

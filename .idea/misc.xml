@@ -4,12 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/animated_donut_progress.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/background_circle.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/donut_background.xml" value="0.112" />
         <entry key="app/src/main/res/drawable/donut_progress.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/progress_color.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/progress_drawable.xml" value="0.112" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.36877288818359377" />
         <entry key="app/src/main/res/layout/donut_background.xml" value="0.1425925925925926" />
         <entry key="app/src/main/res/layout/layout_donut.xml" value="0.335" />
       </map>
