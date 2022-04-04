@@ -5,14 +5,13 @@ import com.andrewaac.data.model.dto.toDomain
 import com.andrewaac.donutchallenge.model.CreditScore
 import com.andrewaac.donutchallenge.repository.CreditScoreRepository
 import java.io.IOException
-import javax.inject.Inject
 
-class CreditScoreRepositoryImpl @Inject constructor(
+class CreditScoreRepositoryImpl(
     private val creditScoreApi: CreditScoreApi
 ) : CreditScoreRepository {
 
     @Throws(IOException::class)
-    override suspend fun getCreditScore(): CreditScore{
+    override suspend fun getCreditScore(): CreditScore {
         return try {
             val response = creditScoreApi.getCreditScore()
 

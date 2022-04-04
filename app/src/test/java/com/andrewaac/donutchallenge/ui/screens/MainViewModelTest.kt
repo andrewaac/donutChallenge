@@ -9,10 +9,7 @@ import com.andrewaac.donutchallenge.ui.screens.utils.TestObserver
 import com.andrewaac.donutchallenge.ui.screens.utils.test
 import com.andrewaac.donutchallenge.usecase.GetCreditScoreUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -67,12 +64,15 @@ internal class MainViewModelTest {
     }
 
     @Test
-    fun `given getCreditScoreUseCase returns ValidCreditScore, when getCreditScore is called, them Error ViewState is emitted`() {
+    fun `given getCreditScoreUseCase returns ValidCreditScore, when getCreditScore is called, them Loaded ViewState is emitted`() {
         runTest {
-            val expected = ViewState.Loaded(10, 100, 0)
+            val minScore = 0
+            val maxScore = 100
+            val score = 10
+            val expected = ViewState.Loaded(maxScore, minScore, score)
             whenever(creditScoreRepository.getCreditScore()).thenReturn(
                 CreditScore.ValidCreditScore(
-                    CreditReportInfo(100, 0, 10)
+                    CreditReportInfo(maxScore, minScore, score)
                 )
             )
 

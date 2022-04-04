@@ -20,7 +20,8 @@
                 <gradient
                     android:endColor="@color/donut_orange"
                     android:startColor="@color/donut_yellow"
-                    android:type="linear" />
+                    android:type="sweep"/>
+                <corners android:radius="1dp" />
             </shape>
         </rotate>
     </item>

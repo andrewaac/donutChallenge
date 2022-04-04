@@ -15,7 +15,7 @@ import javax.inject.Named
 
 sealed class ViewState {
     object Loading : ViewState()
-    data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : ViewState()
+    data class Loaded(val maxScore: Int, val minScore: Int, val score: Int, ) : ViewState()
     object Error : ViewState()
 }
 

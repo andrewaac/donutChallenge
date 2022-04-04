@@ -100,17 +100,16 @@ class DonutView @JvmOverloads constructor(
         donutMaxValue.text = context.getString(R.string.score_out_of, score)
     }
 
+    private fun ProgressBar.update(score: Int) {
+        ObjectAnimator
+            .ofInt(this, "progress", 0, score)
+            .setDuration(500)
+            .start()
+    }
+
     sealed class State {
         object Loading : State()
         data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : State()
         object Error : State()
     }
-}
-
-
-private fun ProgressBar.update(score: Int) {
-    ObjectAnimator
-        .ofInt(this, "progress", 0, score)
-        .setDuration(500)
-        .start()
 }
