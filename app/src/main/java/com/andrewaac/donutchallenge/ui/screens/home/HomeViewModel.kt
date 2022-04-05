@@ -1,11 +1,10 @@
-package com.andrewaac.donutchallenge.ui.screens
+package com.andrewaac.donutchallenge.ui.screens.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andrewaac.donutchallenge.model.CreditScore
-import com.andrewaac.donutchallenge.ui.screens.home.HomeViewState
 import com.andrewaac.donutchallenge.usecase.GetCreditScoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

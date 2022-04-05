@@ -2,9 +2,6 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>ImportOrdering:com.andrewaac.data.di.ApiModule.kt:3</ID>
-    <ID>ImportOrdering:com.andrewaac.donutchallenge.di.DispatchersModule.kt:3</ID>
-    <ID>ImportOrdering:com.andrewaac.donutchallenge.ui.screens.MainViewModel.kt:3</ID>
     <ID>NoWildcardImports:com.andrewaac.donutchallenge.ui.screens.utils.InstantExecutorExtension.kt:7</ID>
   </CurrentIssues>
 </SmellBaseline>

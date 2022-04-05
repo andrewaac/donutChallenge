@@ -3,6 +3,7 @@ package com.andrewaac.donutchallenge.ui.screens
 import com.andrewaac.donutchallenge.model.CreditReportInfo
 import com.andrewaac.donutchallenge.model.CreditScore
 import com.andrewaac.donutchallenge.repository.CreditScoreRepository
+import com.andrewaac.donutchallenge.ui.screens.home.HomeViewModel
 import com.andrewaac.donutchallenge.ui.screens.home.HomeViewState
 import com.andrewaac.donutchallenge.ui.screens.utils.CoroutineTestExtension
 import com.andrewaac.donutchallenge.ui.screens.utils.InstantExecutorExtension

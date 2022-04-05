@@ -11,8 +11,9 @@ import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutView
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewClickListener
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.*
-import com.andrewaac.donutchallenge.ui.screens.HomeViewModel
+import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Error
+import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loaded
+import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loading
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
