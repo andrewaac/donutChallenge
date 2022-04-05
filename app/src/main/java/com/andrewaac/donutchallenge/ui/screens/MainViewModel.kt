@@ -8,7 +8,6 @@ import com.andrewaac.donutchallenge.model.CreditScore
 import com.andrewaac.donutchallenge.usecase.GetCreditScoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
