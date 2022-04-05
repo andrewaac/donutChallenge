@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.andrewaac.donutchallenge.R
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutView
+import com.andrewaac.donutchallenge.databinding.FragmentHomeBinding
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewClickListener
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Error
@@ -18,9 +17,9 @@ import com.andrewaac.donutchallenge.ui.navigationArguments.toCreditReportInfoArg
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home), DonutViewClickListener {
+class HomeFragment : Fragment(), DonutViewClickListener {
 
-    private lateinit var donutView: DonutView
+    private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -28,14 +27,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), DonutViewClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        view?.apply {
-            donutView = view.findViewById(R.id.donut)
-            donutView.donutViewClickListener = this@HomeFragment
-        }
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.donut.donutViewClickListener = this@HomeFragment
         setupViewModelObservers()
-        return view
+        return binding.root
     }
 
     override fun onResume() {
@@ -65,18 +61,16 @@ class HomeFragment : Fragment(R.layout.fragment_home), DonutViewClickListener {
 
     private fun setupViewModelObservers() {
         viewModel.stateHome.observe(viewLifecycleOwner) {
-            when (it) {
-                HomeViewState.Loading -> donutView.updateState(Loading)
-                HomeViewState.Error -> donutView.updateState(Error)
-                is HomeViewState.Loaded -> {
-                    val donutState = Loaded(
-                        score = it.score,
-                        maxScore = it.maxScore,
-                        minScore = it.minScore
-                    )
-                    donutView.updateState(donutState)
-                }
+            val state = when (it) {
+                HomeViewState.Loading -> Loading
+                HomeViewState.Error -> Error
+                is HomeViewState.Loaded -> Loaded(
+                    score = it.score,
+                    maxScore = it.maxScore,
+                    minScore = it.minScore
+                )
             }
+            binding.donut.updateState(state)
         }
     }
 }

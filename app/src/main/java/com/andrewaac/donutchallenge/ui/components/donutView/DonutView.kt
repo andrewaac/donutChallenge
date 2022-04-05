@@ -3,13 +3,13 @@ package com.andrewaac.donutchallenge.ui.components.donutView
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.LayoutInflater
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.andrewaac.donutchallenge.R
+import com.andrewaac.donutchallenge.databinding.LayoutDonutBinding
 import com.andrewaac.donutchallenge.ui.extensions.changeVisibility
 
 class DonutView @JvmOverloads constructor(
@@ -18,21 +18,14 @@ class DonutView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
 
-    private var donutProgressBar: ProgressBar
-    private var donutTitle: TextView
-    private var donutValue: TextView
-    private var donutMaxValue: TextView
+    private var binding: LayoutDonutBinding =
+        LayoutDonutBinding.inflate(LayoutInflater.from(context), this, true)
 
     private var viewState: DonutViewState = DonutViewState.Loading
 
     var donutViewClickListener: DonutViewClickListener? = null
 
     init {
-        inflate(context, R.layout.layout_donut, this)
-        donutProgressBar = findViewById(R.id.donut_progress)
-        donutTitle = findViewById(R.id.donut_title)
-        donutValue = findViewById(R.id.donut_value)
-        donutMaxValue = findViewById(R.id.donut_max_value)
         this.setOnClickListener {
             donutViewClickListener?.onDonutViewClicked(viewState)
         }
@@ -80,33 +73,41 @@ class DonutView @JvmOverloads constructor(
     }
 
     private fun setProgressBarToLoading(isLoading: Boolean) {
-        donutProgressBar.isIndeterminate = isLoading
+        binding.donutProgress.isIndeterminate = isLoading
     }
 
     private fun updateTitleText(@StringRes titleText: Int? = null) {
-        donutTitle.text = titleText?.let { context.getString(it) } ?: EMPTY_STRING
-        donutTitle.changeVisibility(titleText != null)
+        with(binding.donutTitle) {
+            text = titleText?.let { context.getString(it) } ?: EMPTY_STRING
+            changeVisibility(titleText != null)
+        }
     }
 
     private fun updateValueText(@StringRes valueText: Int? = null) {
-        donutValue.text = valueText?.let { context.getString(it) } ?: EMPTY_STRING
-        donutValue.changeVisibility(valueText != null)
+        with(binding.donutValue) {
+            text = valueText?.let { context.getString(it) } ?: EMPTY_STRING
+            changeVisibility(valueText != null)
+        }
     }
 
     private fun updateValue(valueText: Int) {
-        donutValue.text = "$valueText"
-        donutValue.changeVisibility(true)
+        with(binding.donutValue) {
+            text = "$valueText"
+            changeVisibility(true)
+        }
     }
 
     private fun updateMaxValue(maxScore: Int? = null) {
-        donutMaxValue.text =
-            maxScore?.let { context.getString(R.string.score_out_of, maxScore) } ?: EMPTY_STRING
-        donutMaxValue.changeVisibility(maxScore != null)
+        with(binding.donutMaxValue) {
+            text =
+                maxScore?.let { context.getString(R.string.score_out_of, maxScore) } ?: EMPTY_STRING
+            changeVisibility(maxScore != null)
+        }
     }
 
     private fun updateProgressDrawable(@DrawableRes drawableRes: Int = R.drawable.progress_color) {
         val drawable = ContextCompat.getDrawable(context, drawableRes)
-        donutProgressBar.progressDrawable = drawable
+        binding.donutProgress.progressDrawable = drawable
     }
 
     private fun validateCurrentScore(donutViewState: DonutViewState.Loaded): Int {
@@ -114,7 +115,7 @@ class DonutView @JvmOverloads constructor(
     }
 
     private fun updateProgressBar(currentScore: Int, maxScore: Int) {
-        with(donutProgressBar) {
+        with(binding.donutProgress) {
             max = maxScore
             update(currentScore)
         }
