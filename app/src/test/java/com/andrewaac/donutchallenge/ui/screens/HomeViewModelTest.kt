@@ -3,6 +3,7 @@ package com.andrewaac.donutchallenge.ui.screens
 import com.andrewaac.donutchallenge.model.CreditReportInfo
 import com.andrewaac.donutchallenge.model.CreditScore
 import com.andrewaac.donutchallenge.repository.CreditScoreRepository
+import com.andrewaac.donutchallenge.ui.screens.home.HomeViewState
 import com.andrewaac.donutchallenge.ui.screens.utils.CoroutineTestExtension
 import com.andrewaac.donutchallenge.ui.screens.utils.InstantExecutorExtension
 import com.andrewaac.donutchallenge.ui.screens.utils.TestObserver
@@ -20,7 +21,7 @@ import org.mockito.kotlin.whenever
 
 @ExperimentalCoroutinesApi
 @ExtendWith(InstantExecutorExtension::class)
-internal class MainViewModelTest {
+internal class HomeViewModelTest {
 
     @JvmField
     @RegisterExtension
@@ -31,24 +32,24 @@ internal class MainViewModelTest {
     private val creditScoreRepository: CreditScoreRepository = mock()
     private val getCreditScoreUseCase = GetCreditScoreUseCase(creditScoreRepository)
 
-    private lateinit var stateObserver: TestObserver<ViewState>
-    private lateinit var sut: MainViewModel
+    private lateinit var stateObserverHome: TestObserver<HomeViewState>
+    private lateinit var sut: HomeViewModel
 
     @BeforeEach
     fun setup() {
-        sut = MainViewModel(getCreditScoreUseCase, testDispatcher)
-        stateObserver = sut.state.test()
+        sut = HomeViewModel(getCreditScoreUseCase, testDispatcher)
+        stateObserverHome = sut.stateHome.test()
     }
 
     @Test
     fun `given usecase returns EmptyCreditScore, when getCreditScore is called, then Error ViewState is emitted`() {
         runTest {
-            val expected = arrayOf(ViewState.Loading, ViewState.Error)
+            val expected = arrayOf(HomeViewState.Loading, HomeViewState.Error)
             given(creditScoreRepository.getCreditScore()).willReturn(CreditScore.EmptyCreditScore)
 
             sut.getCreditScore()
 
-            stateObserver.assertValues(expected)
+            stateObserverHome.assertValues(expected)
         }
     }
 
@@ -58,7 +59,7 @@ internal class MainViewModelTest {
             val minScore = 0
             val maxScore = 100
             val score = 10
-            val expected = arrayOf(ViewState.Loading, ViewState.Loaded(maxScore, minScore, score))
+            val expected = arrayOf(HomeViewState.Loading, HomeViewState.Loaded(maxScore, minScore, score))
             whenever(creditScoreRepository.getCreditScore()).thenReturn(
                 CreditScore.ValidCreditScore(
                     CreditReportInfo(maxScore, minScore, score)
@@ -67,7 +68,7 @@ internal class MainViewModelTest {
 
             sut.getCreditScore()
 
-            stateObserver.assertValues(expected)
+            stateObserverHome.assertValues(expected)
         }
     }
 }

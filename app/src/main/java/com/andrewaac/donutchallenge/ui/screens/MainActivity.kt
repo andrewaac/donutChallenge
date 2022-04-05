@@ -1,60 +1,31 @@
 package com.andrewaac.donutchallenge.ui.screens
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.andrewaac.donutchallenge.R
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutView
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewClickListener
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Error
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loaded
-import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loading
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DonutViewClickListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var donutView: DonutView
-
-    private val viewModel: MainViewModel by viewModels()
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        donutView = findViewById(R.id.donut)
-        donutView.donutViewClickListener = this
-        setupViewModelObservers()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getCreditScore()
-    }
-
-    override fun onDonutViewClicked(donutViewState: DonutViewState) {
-        when (donutViewState) {
-            Error -> viewModel.getCreditScore()
-            Loading -> Unit
-            is Loaded -> Toast.makeText(this, "Do something", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun setupViewModelObservers() {
-        viewModel.state.observe(this) {
-            when (it) {
-                ViewState.Loading -> donutView.updateState(Loading)
-                ViewState.Error -> donutView.updateState(Error)
-                is ViewState.Loaded -> {
-                    val donutState = Loaded(
-                        score = it.score,
-                        maxScore = it.maxScore,
-                        minScore = it.minScore
-                    )
-                    donutView.updateState(donutState)
-                }
-            }
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) or super.onSupportNavigateUp()
     }
 }

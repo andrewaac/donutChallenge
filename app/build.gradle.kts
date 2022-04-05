@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -56,6 +57,8 @@ dependencies {
     implementation(Dependencies.AndroidX.viewModelScope)
     implementation(Dependencies.Dagger.hilt)
     implementation(Dependencies.Google.material)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
 
     kapt(Dependencies.Dagger.hiltCompiler)
 

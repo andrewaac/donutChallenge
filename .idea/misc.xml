@@ -11,8 +11,9 @@
         <entry key="app/src/main/res/drawable/progress_color.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/progress_color_error.xml" value="0.1055" />
         <entry key="app/src/main/res/drawable/progress_drawable.xml" value="0.112" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.36877288818359377" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/donut_background.xml" value="0.1425925925925926" />
+        <entry key="app/src/main/res/layout/fragment_credit_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_donut.xml" value="0.5503560528992879" />
       </map>
     </option>
