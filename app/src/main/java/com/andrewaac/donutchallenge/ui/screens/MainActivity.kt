@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.state.observe(this) {
             when (it) {
                 ViewState.Loading -> donutView.updateState(Loading)
-                ViewState.Error -> donutView.updateState(Error())
+                ViewState.Error -> donutView.updateState(Error)
                 is ViewState.Loaded -> {
                     val donutState = Loaded(
                         score = it.score,

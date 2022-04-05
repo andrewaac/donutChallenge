@@ -19,6 +19,16 @@ class TestObserver<T> : Observer<T> {
         val latestValue = valueHistory[valueHistory.size - 1]
         assertEquals(expectedValue, latestValue)
     }
+
+    fun assertValues(expectedValues: Array<T>) {
+        if (valueHistory.size < 1) {
+            throw IllegalStateException("TestObserver has no values")
+        }
+        expectedValues.forEachIndexed { index, t ->
+            val latestValue = valueHistory[index]
+            assertEquals(t, latestValue)
+        }
+    }
 }
 
 fun <T> LiveData<T>.test(): TestObserver<T> {

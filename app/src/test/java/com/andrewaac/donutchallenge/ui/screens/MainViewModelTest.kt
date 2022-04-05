@@ -43,12 +43,12 @@ internal class MainViewModelTest {
     @Test
     fun `given usecase returns EmptyCreditScore, when getCreditScore is called, then Error ViewState is emitted`() {
         runTest {
-            val expected = ViewState.Error
+            val expected = arrayOf(ViewState.Loading, ViewState.Error)
             given(creditScoreRepository.getCreditScore()).willReturn(CreditScore.EmptyCreditScore)
 
             sut.getCreditScore()
 
-            stateObserver.assertValue(expected)
+            stateObserver.assertValues(expected)
         }
     }
 
@@ -58,7 +58,7 @@ internal class MainViewModelTest {
             val minScore = 0
             val maxScore = 100
             val score = 10
-            val expected = ViewState.Loaded(maxScore, minScore, score)
+            val expected = arrayOf(ViewState.Loading, ViewState.Loaded(maxScore, minScore, score))
             whenever(creditScoreRepository.getCreditScore()).thenReturn(
                 CreditScore.ValidCreditScore(
                     CreditReportInfo(maxScore, minScore, score)
@@ -67,7 +67,7 @@ internal class MainViewModelTest {
 
             sut.getCreditScore()
 
-            stateObserver.assertValue(expected)
+            stateObserver.assertValues(expected)
         }
     }
 }
