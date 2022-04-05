@@ -14,12 +14,12 @@ import javax.inject.Singleton
 @Module
 class ApiModule {
 
-    private fun getBaseUrl() = "https://android-interview.s3.eu-west-2.amazonaws.com/"
+    private val baseUrl = "https://android-interview.s3.eu-west-2.amazonaws.com/"
 
     @Singleton
     @Provides
     fun providesRetrofitClient(): Retrofit = Retrofit.Builder()
-        .baseUrl(getBaseUrl())
+        .baseUrl(baseUrl)
         .addConverterFactory(
             GsonConverterFactory.create(
                 GsonBuilder().setLenient().setPrettyPrinting().create()

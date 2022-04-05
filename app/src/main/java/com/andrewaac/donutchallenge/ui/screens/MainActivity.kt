@@ -5,7 +5,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.components.DonutView
-import com.andrewaac.donutchallenge.ui.components.DonutView.DonutState.*
+import com.andrewaac.donutchallenge.ui.components.DonutView.DonutState.Error
+import com.andrewaac.donutchallenge.ui.components.DonutView.DonutState.Loaded
+import com.andrewaac.donutchallenge.ui.components.DonutView.DonutState.Loading
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.state.observe(this) {
             when (it) {
                 ViewState.Loading -> donutView.updateState(Loading)
-                ViewState.Error -> donutView.updateState(Error)
+                ViewState.Error -> donutView.updateState(Error())
                 is ViewState.Loaded -> {
                     val donutState = Loaded(
                         score = it.score,

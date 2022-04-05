@@ -15,5 +15,4 @@ class DispatchersModule {
     @Provides
     @Named("io")
     fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
-
 }

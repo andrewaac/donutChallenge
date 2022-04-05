@@ -15,5 +15,4 @@ class UseCaseModule {
     fun providesGetCreditScoreUseCase(
         creditScoreRepository: CreditScoreRepository
     ): GetCreditScoreUseCase = GetCreditScoreUseCase(creditScoreRepository)
-
 }

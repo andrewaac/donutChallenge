@@ -2,7 +2,9 @@ object Dependencies {
 
     object AndroidX {
         val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.Android.appCompatVersion}" }
-        val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayoutVersion}" }
+        val constraintLayout by lazy {
+            "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayoutVersion}"
+        }
         val core by lazy { "androidx.core:core-ktx:${Versions.Android.coreVersion}" }
         val coreTesting by lazy { "androidx.arch.core:core-testing:${Versions.Android.coreTestingVersion}" }
         val espresso by lazy { "androidx.test.espresso:espresso-core:${Versions.Android.espressoVersion}" }
@@ -44,5 +46,4 @@ object Dependencies {
     }
 
     val javaxInject by lazy { "javax.inject:javax.inject:1" }
-
 }

@@ -3,7 +3,6 @@ package com.andrewaac.donutchallenge.ui.screens.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import org.junit.jupiter.api.Assertions.assertEquals
-import java.lang.IllegalStateException
 
 class TestObserver<T> : Observer<T> {
 

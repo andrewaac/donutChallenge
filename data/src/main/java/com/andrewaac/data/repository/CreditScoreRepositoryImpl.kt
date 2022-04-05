@@ -1,5 +1,6 @@
 package com.andrewaac.data.repository
 
+import android.util.Log
 import com.andrewaac.data.api.CreditScoreApi
 import com.andrewaac.data.model.dto.toDomain
 import com.andrewaac.donutchallenge.model.CreditScore
@@ -22,6 +23,7 @@ class CreditScoreRepositoryImpl(
                 CreditScore.EmptyCreditScore
             }
         } catch (e: IOException) {
+            Log.e(javaClass.simpleName, null, e)
             CreditScore.EmptyCreditScore
         }
     }

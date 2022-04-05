@@ -41,18 +41,7 @@ internal class MainViewModelTest {
     }
 
     @Test
-    fun `when onViewCreated is called, then Loading ViewState is emitted`() {
-        runTest {
-            val expected = ViewState.Loading
-
-            sut.onViewCreated()
-
-            stateObserver.assertValue(expected)
-        }
-    }
-
-    @Test
-    fun `given getCreditScoreUseCase returns EmptyCreditScore, when getCreditScore is called, them Error ViewState is emitted`() {
+    fun `given usecase returns EmptyCreditScore, when getCreditScore is called, then Error ViewState is emitted`() {
         runTest {
             val expected = ViewState.Error
             given(creditScoreRepository.getCreditScore()).willReturn(CreditScore.EmptyCreditScore)
@@ -64,7 +53,7 @@ internal class MainViewModelTest {
     }
 
     @Test
-    fun `given getCreditScoreUseCase returns ValidCreditScore, when getCreditScore is called, them Loaded ViewState is emitted`() {
+    fun `given usecase returns ValidCreditScore, when getCreditScore is called, then Loaded ViewState is emitted`() {
         runTest {
             val minScore = 0
             val maxScore = 100

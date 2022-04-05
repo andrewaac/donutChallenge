@@ -3,6 +3,7 @@ package com.andrewaac.donutchallenge.ui.components
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -72,6 +73,7 @@ class DonutView @JvmOverloads constructor(
             updateProgressBar(score, donutState.maxScore)
             updateMaxValue(donutState.maxScore)
         } catch (e: IllegalArgumentException) {
+            Log.e(javaClass.simpleName, null, e)
             showError()
         }
     }
