@@ -37,11 +37,11 @@ class DonutView @JvmOverloads constructor(
         donutMaxValue = findViewById(R.id.donut_max_value)
     }
 
-    fun updateState(state: State) {
-        when (state) {
-            State.Error -> showError()
-            State.Loading -> showingLoading()
-            is State.Loaded -> showLoaded(state)
+    fun updateState(donutState: DonutState) {
+        when (donutState) {
+            DonutState.Error -> showError()
+            DonutState.Loading -> showingLoading()
+            is DonutState.Loaded -> showLoaded(donutState)
         }
     }
 
@@ -62,15 +62,15 @@ class DonutView @JvmOverloads constructor(
         updateMaxValue()
     }
 
-    private fun showLoaded(state: State.Loaded) {
+    private fun showLoaded(donutState: DonutState.Loaded) {
         try {
             updateProgressDrawable(R.drawable.progress_color)
             setProgressBarToLoading(false)
             updateTitleText(R.string.donut_title)
-            val score = validateCurrentScore(state)
+            val score = validateCurrentScore(donutState)
             updateValue(score)
-            updateProgressBar(score, state.maxScore)
-            updateMaxValue(state.maxScore)
+            updateProgressBar(score, donutState.maxScore)
+            updateMaxValue(donutState.maxScore)
         } catch (e: IllegalArgumentException) {
             showError()
         }
@@ -106,8 +106,8 @@ class DonutView @JvmOverloads constructor(
         donutProgressBar.progressDrawable = drawable
     }
 
-    private fun validateCurrentScore(state: State.Loaded): Int {
-        return with(state) { score.coerceIn(minScore, maxScore) }
+    private fun validateCurrentScore(donutState: DonutState.Loaded): Int {
+        return with(donutState) { score.coerceIn(minScore, maxScore) }
     }
 
     private fun updateProgressBar(currentScore: Int, maxScore: Int) {
@@ -124,9 +124,9 @@ class DonutView @JvmOverloads constructor(
             .start()
     }
 
-    sealed class State {
-        object Loading : State()
-        data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : State()
-        object Error : State()
+    sealed class DonutState {
+        object Loading : DonutState()
+        data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : DonutState()
+        object Error : DonutState()
     }
 }

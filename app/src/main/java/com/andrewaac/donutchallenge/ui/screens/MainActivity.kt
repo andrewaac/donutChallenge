@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.components.DonutView
-import com.andrewaac.donutchallenge.ui.components.DonutView.State.*
+import com.andrewaac.donutchallenge.ui.components.DonutView.DonutState.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
