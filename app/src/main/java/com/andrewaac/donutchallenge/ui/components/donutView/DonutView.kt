@@ -1,6 +1,5 @@
-package com.andrewaac.donutchallenge.ui.components
+package com.andrewaac.donutchallenge.ui.components.donutView
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
@@ -13,12 +12,6 @@ import androidx.core.content.ContextCompat
 import com.andrewaac.donutchallenge.R
 import com.andrewaac.donutchallenge.ui.extensions.changeVisibility
 
-private const val EMPTY_STRING = ""
-private const val MAX_SCORE = 100
-private const val PROGRESS_BAR_ANIMATION_DURATION = 500L
-private const val PROGRESS_BAR_ANIMATION_START_VALUE = 0
-private const val PROGRESS_BAR_PROPERTY_PROGRESS = "progress"
-
 class DonutView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -30,19 +23,27 @@ class DonutView @JvmOverloads constructor(
     private var donutValue: TextView
     private var donutMaxValue: TextView
 
+    private var viewState: DonutViewState = DonutViewState.Loading
+
+    var donutViewClickListener: DonutViewClickListener? = null
+
     init {
         inflate(context, R.layout.layout_donut, this)
         donutProgressBar = findViewById(R.id.donut_progress)
         donutTitle = findViewById(R.id.donut_title)
         donutValue = findViewById(R.id.donut_value)
         donutMaxValue = findViewById(R.id.donut_max_value)
+        this.setOnClickListener {
+            donutViewClickListener?.onDonutViewClicked(viewState)
+        }
     }
 
-    fun updateState(donutState: DonutState) {
-        when (donutState) {
-            DonutState.Error -> showError()
-            DonutState.Loading -> showingLoading()
-            is DonutState.Loaded -> showLoaded(donutState)
+    fun updateState(donutViewState: DonutViewState) {
+        viewState = donutViewState
+        when (donutViewState) {
+            DonutViewState.Error -> showError()
+            DonutViewState.Loading -> showingLoading()
+            is DonutViewState.Loaded -> showLoaded(donutViewState)
         }
     }
 
@@ -63,15 +64,15 @@ class DonutView @JvmOverloads constructor(
         updateMaxValue()
     }
 
-    private fun showLoaded(donutState: DonutState.Loaded) {
+    private fun showLoaded(donutViewState: DonutViewState.Loaded) {
         try {
             updateProgressDrawable(R.drawable.progress_color)
             setProgressBarToLoading(false)
             updateTitleText(R.string.donut_title)
-            val score = validateCurrentScore(donutState)
+            val score = validateCurrentScore(donutViewState)
             updateValue(score)
-            updateProgressBar(score, donutState.maxScore)
-            updateMaxValue(donutState.maxScore)
+            updateProgressBar(score, donutViewState.maxScore)
+            updateMaxValue(donutViewState.maxScore)
         } catch (e: IllegalArgumentException) {
             Log.e(javaClass.simpleName, null, e)
             showError()
@@ -108,8 +109,8 @@ class DonutView @JvmOverloads constructor(
         donutProgressBar.progressDrawable = drawable
     }
 
-    private fun validateCurrentScore(donutState: DonutState.Loaded): Int {
-        return with(donutState) { score.coerceIn(minScore, maxScore) }
+    private fun validateCurrentScore(donutViewState: DonutViewState.Loaded): Int {
+        return with(donutViewState) { score.coerceIn(minScore, maxScore) }
     }
 
     private fun updateProgressBar(currentScore: Int, maxScore: Int) {
@@ -119,16 +120,8 @@ class DonutView @JvmOverloads constructor(
         }
     }
 
-    private fun ProgressBar.update(score: Int) {
-        ObjectAnimator
-            .ofInt(this, PROGRESS_BAR_PROPERTY_PROGRESS, PROGRESS_BAR_ANIMATION_START_VALUE, score)
-            .setDuration(PROGRESS_BAR_ANIMATION_DURATION)
-            .start()
-    }
-
-    sealed class DonutState {
-        object Loading : DonutState()
-        data class Loaded(val score: Int, val maxScore: Int, val minScore: Int) : DonutState()
-        object Error : DonutState()
+    companion object {
+        private const val EMPTY_STRING = ""
+        private const val MAX_SCORE = 100
     }
 }
