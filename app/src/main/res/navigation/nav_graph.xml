@@ -24,8 +24,8 @@
         android:label="Credit Details"
         tools:layout="@layout/fragment_credit_details">
         <argument
-            android:name="credit_score_value"
-            android:defaultValue="0"
-            app:argType="integer" />
+            android:name="credit_report_info"
+            app:argType="com.andrewaac.donutchallenge.ui.navigationArguments.CreditReportInfoArg"
+            app:nullable="true" />
     </fragment>
 </navigation>

@@ -4,4 +4,6 @@
     <string name="score_out_of">out of %d</string>
     <string name="error">Error</string>
     <string name="donut_title">Your credit score is</string>
+    <string name="equifax_rating">Equifax Rating</string>
+    <string name="equifax_score">Equifax Score</string>
 </resources>

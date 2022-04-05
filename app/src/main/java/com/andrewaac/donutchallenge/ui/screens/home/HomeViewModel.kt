@@ -32,9 +32,11 @@ class HomeViewModel @Inject constructor(
             val newState = when (creditScore) {
                 CreditScore.EmptyCreditScore -> HomeViewState.Error
                 is CreditScore.ValidCreditScore -> HomeViewState.Loaded(
-                    score = creditScore.creditReportInfo.score,
+                    equifaxScoreBand = creditScore.creditReportInfo.equifaxScoreBand,
+                    equifaxScoreBandDescription = creditScore.creditReportInfo.equifaxScoreBandDescription,
                     maxScore = creditScore.creditReportInfo.maxScoreValue,
-                    minScore = creditScore.creditReportInfo.minScoreValue
+                    minScore = creditScore.creditReportInfo.minScoreValue,
+                    score = creditScore.creditReportInfo.score,
                 )
             }
             _state.value = newState

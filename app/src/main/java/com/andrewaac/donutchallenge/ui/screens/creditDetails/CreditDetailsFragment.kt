@@ -8,13 +8,17 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.andrewaac.donutchallenge.R
+import com.andrewaac.donutchallenge.model.CreditReportInfo
 
 class CreditDetailsFragment : Fragment(R.layout.fragment_credit_details) {
 
-    private val args: CreditDetailsFragmentArgs by navArgs()
+    private val args: CreditDetailsFragmentArgs? by navArgs()
 
-    private val creditScore: Int
-        get() = args.creditScoreValue
+    private lateinit var equifaxScoreBandDesc: TextView
+    private lateinit var equifaxScoreBand: TextView
+
+    private val creditReportInfo: CreditReportInfo?
+        get() = args?.creditReportInfo?.toDomain()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,8 +27,13 @@ class CreditDetailsFragment : Fragment(R.layout.fragment_credit_details) {
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         view?.apply {
-            val textView = findViewById<TextView>(R.id.test_text_view)
-            textView.text = "You have a score of $creditScore"
+            equifaxScoreBandDesc = findViewById(R.id.equifax_score_band_value)
+            equifaxScoreBand = findViewById(R.id.equifax_score_value)
+
+            creditReportInfo?.let {
+                equifaxScoreBandDesc.text = it.equifaxScoreBandDescription
+                equifaxScoreBand.text = "${it.equifaxScoreBand}"
+            }
         }
         return view
     }

@@ -24,7 +24,13 @@ internal class CreditScoreRepositoryImplTest {
     fun `given creditScoreApi return success, when getCreditScore is called, then ValidCreditScore is returned`() {
         runBlocking {
             val creditReportInfo =
-                CreditReportInfo(maxScoreValue = 100, minScoreValue = 0, score = 10)
+                CreditReportInfo(
+                    equifaxScoreBand = 4,
+                    equifaxScoreBandDescription = "Great",
+                    maxScoreValue = 100,
+                    minScoreValue = 0,
+                    score = 10,
+                )
             val expected = CreditScore.ValidCreditScore(creditReportInfo)
 
             val sut = CreditScoreRepositoryImpl(creditScoreApi)
@@ -32,9 +38,11 @@ internal class CreditScoreRepositoryImplTest {
                 Response.success(
                     CreditScoreDTO(
                         CreditReportInfoDTO(
-                            score = 10,
+                            equifaxScoreBand = 4,
+                            equifaxScoreBandDescription = "Great",
                             maxScoreValue = 100,
-                            minScoreValue = 0
+                            minScoreValue = 0,
+                            score = 10,
                         )
                     )
                 )

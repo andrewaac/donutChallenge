@@ -14,6 +14,8 @@ fun CreditScoreDTO?.toDomain(): CreditScore {
     } else {
         CreditScore.ValidCreditScore(
             CreditReportInfo(
+                equifaxScoreBand = this.creditReportInfoDTO.equifaxScoreBand,
+                equifaxScoreBandDescription = this.creditReportInfoDTO.equifaxScoreBandDescription,
                 maxScoreValue = this.creditReportInfoDTO.maxScoreValue,
                 minScoreValue = this.creditReportInfoDTO.minScoreValue,
                 score = this.creditReportInfoDTO.score,

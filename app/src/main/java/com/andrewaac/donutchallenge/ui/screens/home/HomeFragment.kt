@@ -14,6 +14,7 @@ import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Error
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loaded
 import com.andrewaac.donutchallenge.ui.components.donutView.DonutViewState.Loading
+import com.andrewaac.donutchallenge.ui.navigationArguments.toCreditReportInfoArg
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,15 +47,20 @@ class HomeFragment : Fragment(R.layout.fragment_home), DonutViewClickListener {
         when (donutViewState) {
             Error -> viewModel.getCreditScore()
             Loading -> Unit
-            is Loaded -> showDetails(donutViewState.score)
+            is Loaded -> showDetails()
         }
     }
 
-    private fun showDetails(creditScore: Int) {
-        findNavController()
-            .navigate(
-                HomeFragmentDirections.goToCreditDetailsFragment(creditScore)
-            )
+    private fun showDetails() {
+        val currentState = viewModel.stateHome.value
+        if (currentState is HomeViewState.Loaded) {
+            findNavController()
+                .navigate(
+                    HomeFragmentDirections.goToCreditDetailsFragment(
+                        currentState.toCreditReportInfoArg()
+                    )
+                )
+        }
     }
 
     private fun setupViewModelObservers() {
