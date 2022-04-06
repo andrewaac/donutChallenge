@@ -11,6 +11,10 @@ object Dependencies {
         val fragment by lazy { "androidx.fragment:fragment-ktx:${Versions.Android.fragmentVersion}" }
         val junit by lazy { "androidx.test.ext:junit:${Versions.Android.junitVersion}" }
         val liveData by lazy { "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Android.liveDataVersion}" }
+        val navigationFragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.Android.navigationVersion}" }
+        val navigationUI by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.Android.navigationVersion}" }
+        val testRunner by lazy {"androidx.test:runner:${Versions.Android.testVersion}"}
+        val testRules by lazy {"androidx.test:rules:${Versions.Android.testVersion}"}
         val viewModelScope by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.viewModelVersion}" }
     }
 

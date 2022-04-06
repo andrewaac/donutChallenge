@@ -9,6 +9,8 @@ object Versions {
         const val fragmentVersion = "1.4.1"
         const val junitVersion = "1.1.3"
         const val liveDataVersion = "2.4.1"
+        const val navigationVersion = "2.4.1"
+        const val testVersion = "1.4.0"
         const val viewModelVersion = "2.4.0"
     }
 

@@ -60,11 +60,11 @@ dependencies {
     implementation(Dependencies.AndroidX.core)
     implementation(Dependencies.AndroidX.fragment)
     implementation(Dependencies.AndroidX.liveData)
+    implementation(Dependencies.AndroidX.navigationFragment)
+    implementation(Dependencies.AndroidX.navigationUI)
     implementation(Dependencies.AndroidX.viewModelScope)
     implementation(Dependencies.Dagger.hilt)
     implementation(Dependencies.Google.material)
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.1")
 
     kapt(Dependencies.Dagger.hiltCompiler)
 
@@ -77,9 +77,8 @@ dependencies {
     androidTestImplementation(Dependencies.AndroidX.coreTesting)
     androidTestImplementation(Dependencies.AndroidX.espresso)
     androidTestImplementation(Dependencies.AndroidX.junit)
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-
+    androidTestImplementation(Dependencies.AndroidX.testRules)
+    androidTestImplementation(Dependencies.AndroidX.testRunner)
 }
 
 tasks.withType<Test> {
