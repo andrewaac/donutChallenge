@@ -57,13 +57,25 @@ internal class HomeViewModelTest {
     @Test
     fun `given usecase returns ValidCreditScore, when getCreditScore is called, then Loaded ViewState is emitted`() {
         runTest {
+            val equifaxScoreBand = 4
+            val equifaxScoreBandDesc = "Great"
             val minScore = 0
             val maxScore = 100
             val score = 10
-            val expected = arrayOf(HomeViewState.Loading, HomeViewState.Loaded(maxScore, minScore, score))
+            val expected = arrayOf(
+                HomeViewState.Loading, HomeViewState.Loaded(
+                    equifaxScoreBand, equifaxScoreBandDesc, maxScore, minScore, score
+                )
+            )
             whenever(creditScoreRepository.getCreditScore()).thenReturn(
                 CreditScore.ValidCreditScore(
-                    CreditReportInfo(maxScore, minScore, score)
+                    CreditReportInfo(
+                        equifaxScoreBand,
+                        equifaxScoreBandDesc,
+                        maxScore,
+                        minScore,
+                        score
+                    )
                 )
             )
 

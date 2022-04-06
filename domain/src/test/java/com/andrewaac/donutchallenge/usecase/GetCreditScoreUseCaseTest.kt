@@ -16,6 +16,8 @@ internal class GetCreditScoreUseCaseTest {
     private val emptyCreditScore = CreditScore.EmptyCreditScore
 
     private val creditReportInfo = CreditReportInfo(
+        equifaxScoreBand = 4,
+        equifaxScoreBandDescription = "Great",
         maxScoreValue = 100,
         minScoreValue = 0,
         score = 10

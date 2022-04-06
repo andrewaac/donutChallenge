@@ -77,6 +77,8 @@ dependencies {
     androidTestImplementation(Dependencies.AndroidX.coreTesting)
     androidTestImplementation(Dependencies.AndroidX.espresso)
     androidTestImplementation(Dependencies.AndroidX.junit)
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test:rules:1.4.0")
 
 }
 
